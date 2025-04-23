@@ -23,7 +23,6 @@ A colorful web application that translates English text to Hindi and Gujarati us
 
 ## 🧠 Model Information
 - Hindi: Helsinki-NLP/opus-mt-en-hi (~200MB)
-- Gujarati: Helsinki-NLP/opus-mt-en-gu (~200MB)
 
 ## ⚠️ Known Issues
 - First-time load takes 1-2 minutes (model download)
