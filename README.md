@@ -24,8 +24,8 @@ A colorful web application that translates English text to Hindi and Gujarati us
 ## 🚀 Installation
 
 ##📂 Project Structure
-ai-text-translator/
-├── translator_app.py       # Main application code
-├── requirements.txt        # Dependencies
-├── README.md              # This documentation
-└── .gitignore             # Ignore unnecessary files
+- ai-text-translator/
+- ├── translator_app.py       # Main application code
+- ├── requirements.txt        # Dependencies
+- ├── README.md              # This documentation
+- └── .gitignore             # Ignore unnecessary files
