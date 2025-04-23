@@ -23,7 +23,8 @@ A colorful web application that translates English text to Hindi and Gujarati us
 
 ## 🚀 Installation
 
-##📂 Project Structure
+## 📂 Project Structure
+```bash
 - ai-text-translator/  
 ├── translator_app.py       # Main application code  
 ├── requirements.txt        # Dependencies  
