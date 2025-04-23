@@ -6,14 +6,12 @@ import time
 @st.cache_resource
 def load_models():
     return {
-        'Hindi': pipeline("translation", model="Helsinki-NLP/opus-mt-en-hi"),
-        'Gujarati': pipeline("translation", model="Helsinki-NLP/opus-mt-en-gu")
+        'Hindi': pipeline("translation", model="Helsinki-NLP/opus-mt-en-hi")
     }
 
 # Language configurations with color themes
 TARGET_LANGUAGES = {
-    'Hindi': {'color': '#FF6B6B', 'icon': '🟥'},
-    'Gujarati': {'color': '#FFD166', 'icon': '🟨'}
+    'Hindi': {'color': '#FF6B6B', 'icon': '🟥'}
 }
 
 # Gradient background function
@@ -92,7 +90,7 @@ def main():
         margin-bottom: 1.5rem;
         text-align: center;
     ">
-        <p style="font-size: 1.1rem;">This app uses local AI models to translate English to Hindi and Gujarati</p>
+        <p style="font-size: 1.1rem;">This app uses local AI models to translate English to Hindi</p>
     </div>
     """, unsafe_allow_html=True)
     
@@ -111,7 +109,7 @@ def main():
             st.warning("Please enter some text to translate.")
         else:
             with st.spinner("AI is translating..."):
-                cols = st.columns(2)
+                cols = st.columns(1)
                 for i, (lang, info) in enumerate(TARGET_LANGUAGES.items()):
                     with cols[i]:
                         start_time = time.time()
@@ -138,7 +136,6 @@ def main():
         <p style="color: #555;">Made with ❤️ using Streamlit | Powered by Hugging Face Transformers</p>
         <div style="display: flex; justify-content: center; gap: 10px;">
             <span style="color: {TARGET_LANGUAGES['Hindi']['color']}">Hindi {TARGET_LANGUAGES['Hindi']['icon']}</span>
-            <span style="color: {TARGET_LANGUAGES['Gujarati']['color']}">Gujarati {TARGET_LANGUAGES['Gujarati']['icon']}</span>
         </div>
     </div>
     """, unsafe_allow_html=True)
