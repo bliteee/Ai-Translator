@@ -96,7 +96,7 @@ def main():
     </div>
     """, unsafe_allow_html=True)
     
-    # Load models (will show loading spinner on first run)
+    # Load models
     with st.spinner("Loading AI models... (This happens only once)"):
         models = load_models()
     
@@ -126,7 +126,6 @@ def main():
                             unsafe_allow_html=True
                         )
                         st.caption(f"Translated in {time.time()-start_time:.2f}s")
-                st.balloons()
 
     st.markdown("---")
     st.markdown(f"""
