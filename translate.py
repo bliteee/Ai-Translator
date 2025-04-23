@@ -1,31 +1,29 @@
 import streamlit as st
-from googletrans import Translator, LANGUAGES
+from transformers import pipeline
+import time
 
-# Initialize the translator
-translator = Translator()
+# Load translation models (cached for performance)
+@st.cache_resource
+def load_models():
+    return {
+        'Hindi': pipeline("translation", model="Helsinki-NLP/opus-mt-en-hi"),
+        'Gujarati': pipeline("translation", model="Helsinki-NLP/opus-mt-en-gu")
+    }
 
-# Language codes for our target languages with color themes
+# Language configurations with color themes
 TARGET_LANGUAGES = {
-    'Hindi': {'code': 'hi', 'color': '#FF6B6B', 'icon': '🛑'},
-    'Gujarati': {'code': 'gu', 'color': '#FFD166', 'icon': '🛑'}
+    'Hindi': {'color': '#FF6B6B', 'icon': '🟥'},
+    'Gujarati': {'color': '#FFD166', 'icon': '🟨'}
 }
-
-# Function to perform translation
-def translate_text(text, dest_language):
-    try:
-        translation = translator.translate(text, dest=dest_language)
-        return translation.text
-    except Exception as e:
-        return f"Error in translation: {str(e)}"
 
 # Gradient background function
 def set_bg_gradient():
     st.markdown(
-        f"""
+        """
         <style>
-        .stApp {{
+        .stApp {
             background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
-        }}
+        }
         </style>
         """,
         unsafe_allow_html=True
@@ -47,7 +45,7 @@ def colorful_header():
             margin-bottom: 20px;
         }
         </style>
-        <h1 class="title-text">AI Text Translator 🌐</h1>
+        <h1 class="title-text">AI-Powered Translator 🌐</h1>
         """,
         unsafe_allow_html=True
     )
@@ -75,22 +73,17 @@ def colorful_card(text, title, color, icon):
     </div>
     """
 
-# Main app function
 def main():
     # Set page config
     st.set_page_config(
-        page_title="AI Text Translator",
+        page_title="AI-Powered Translator",
         page_icon="🌐",
         layout="wide"
     )
     
-    # Set gradient background
     set_bg_gradient()
-    
-    # Add colorful header
     colorful_header()
     
-    # Description
     st.markdown("""
     <div style="
         background-color: rgba(255,255,255,0.8);
@@ -99,51 +92,42 @@ def main():
         margin-bottom: 1.5rem;
         text-align: center;
     ">
-        <p style="font-size: 1.1rem;">This app instantly translates English text to Hindi and Gujarati using Google Translate API.</p>
+        <p style="font-size: 1.1rem;">This app uses local AI models to translate English to Hindi and Gujarati</p>
     </div>
     """, unsafe_allow_html=True)
     
-    # Input text area with colorful border
+    # Load models (will show loading spinner on first run)
+    with st.spinner("Loading AI models... (This happens only once)"):
+        models = load_models()
+    
     input_text = st.text_area(
         "Enter English text to translate:", 
         height=150,
-        placeholder="Type or paste your English text here...",
-        help="The text you enter here will be translated to both languages"
+        placeholder="Type or paste your English text here..."
     )
     
-    # Colorful translate button
-    if st.button(
-        "✨ Translate Now ✨",
-        use_container_width=True,
-        help="Click to translate your text"
-    ):
+    if st.button("✨ Translate Now ✨", use_container_width=True):
         if not input_text.strip():
             st.warning("Please enter some text to translate.")
         else:
-            with st.spinner("Translating your text..."):
-                # Create columns for translations
+            with st.spinner("AI is translating..."):
                 cols = st.columns(2)
-                
                 for i, (lang, info) in enumerate(TARGET_LANGUAGES.items()):
                     with cols[i]:
-                        translated_text = translate_text(input_text, info['code'])
+                        start_time = time.time()
+                        translation = models[lang](input_text)[0]['translation_text']
                         st.markdown(
                             colorful_card(
-                                translated_text,
+                                translation,
                                 lang,
                                 info['color'],
                                 info['icon']
                             ),
                             unsafe_allow_html=True
                         )
-                st.session_state.translated = True
-    
-    # Add some animated confetti on successful translation
-    if st.session_state.get('translated', False):
-        st.balloons()
-        st.session_state.translated = False  # Reset after showing
-    
-    # Footer with colorful accents
+                        st.caption(f"Translated in {time.time()-start_time:.2f}s")
+                st.balloons()
+
     st.markdown("---")
     st.markdown(f"""
     <div style="
@@ -152,7 +136,7 @@ def main():
         border-radius: 10px;
         text-align: center;
     ">
-        <p style="color: #555;">Made SSM ❤️</p>
+        <p style="color: #555;">Made with ❤️ using Streamlit | Powered by Hugging Face Transformers</p>
         <div style="display: flex; justify-content: center; gap: 10px;">
             <span style="color: {TARGET_LANGUAGES['Hindi']['color']}">Hindi {TARGET_LANGUAGES['Hindi']['icon']}</span>
             <span style="color: {TARGET_LANGUAGES['Gujarati']['color']}">Gujarati {TARGET_LANGUAGES['Gujarati']['icon']}</span>
@@ -161,6 +145,4 @@ def main():
     """, unsafe_allow_html=True)
 
 if __name__ == "__main__":
-    if 'translated' not in st.session_state:
-        st.session_state.translated = False
     main()
