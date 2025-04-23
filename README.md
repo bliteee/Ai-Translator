@@ -23,7 +23,9 @@ A colorful web application that translates English text to Hindi and Gujarati us
 
 ## 🚀 Installation
 
-1. Clone the repository:
-```bash
-git clone https://github.com/your-username/ai-text-translator.git
-cd ai-text-translator
+##📂 Project Structure
+ai-text-translator/
+├── translator_app.py       # Main application code
+├── requirements.txt        # Dependencies
+├── README.md              # This documentation
+└── .gitignore             # Ignore unnecessary files
