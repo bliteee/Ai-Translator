@@ -2,7 +2,7 @@
 
 # 🌈 AI Text Translator Web App
 
-A colorful web application that translates English text to Hindi and Gujarati using Google Translate API, built with Streamlit.
+A colorful web application that translates English text to Hindi, built with Streamlit.
 
 🖥 Try it here →[Link for website](https://ai-translator-shshshnk.streamlit.app/)
 
