@@ -8,11 +8,9 @@ A colorful web application that translates English text to Hindi and Gujarati us
 
 ## ✨ Features
 
-- **Dual Language Translation**: Convert English text to Hindi and Gujarati simultaneously
 - **Colorful UI**: Visually appealing design with themed language cards
 - **Real-time Translation**: Instant results with loading indicators
 - **Responsive Design**: Works on both desktop and mobile devices
-- **Celebration Effects**: Confetti animation on successful translation
 
 ## 🛠️ Technologies Used
 
