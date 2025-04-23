@@ -17,11 +17,17 @@ A colorful web application that translates English text to Hindi and Gujarati us
 ## 🛠️ Technologies Used
 
 - Python 3.9+
-- Streamlit (Web Framework)
-- googletrans (Translation API)
-- HTML/CSS (For styling)
+- Streamlit (UI)
+- Hugging Face Transformers (AI models)
+- PyTorch (ML backend)
 
-## 🚀 Installation
+## 🧠 Model Information
+- Hindi: Helsinki-NLP/opus-mt-en-hi (~200MB)
+- Gujarati: Helsinki-NLP/opus-mt-en-gu (~200MB)
+
+## ⚠️ Known Issues
+- First-time load takes 1-2 minutes (model download)
+- Long texts (>100 words) may take 5-10 seconds
 
 ## 📂 Project Structure
 ```bash
