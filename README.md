@@ -31,5 +31,5 @@ A colorful web application that translates English text to Hindi, built with Str
 - ai-text-translator/  
 ├── translator_app.py       # Main application code  
 ├── requirements.txt        # Dependencies  
-├── README.md              # This documentation  
-└── .gitignore             # Ignore unnecessary files  
+└── README.md              # This documentation  
+
