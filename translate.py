@@ -133,7 +133,7 @@ def main():
         border-radius: 10px;
         text-align: center;
     ">
-        <p style="color: #555;">Made by SSM ❤️</p>
+        <p style="color: #555;">Made by SSM 🌹</p>
         <div style="display: flex; justify-content: center; gap: 10px;">
             <span style="color: {TARGET_LANGUAGES['Hindi']['color']}">Hindi {TARGET_LANGUAGES['Hindi']['icon']}</span>
         </div>
